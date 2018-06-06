@@ -19,6 +19,11 @@ const reducer = (state = initialState, action) => {
       return {
         todoList: newList
       };
+    case actionTypes.UPDATE_REDUX_STORE:
+    console.log(action.list);
+      return {
+        todoList: action.list
+      }
     default:
       return state;
   }

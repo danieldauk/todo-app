@@ -14,15 +14,17 @@ class Input extends Component {
 
   onSubmitHandler = event => {
     event.preventDefault();
-    this.props.onSubmit(this.state.listItem);
+    if (this.state.listItem.value !== "") {
+      this.props.onSubmit(this.state.listItem);
 
-    this.setState({
-      listItem: {
-        value: "",
-        completed: false,
-        id: ""
-      }
-    });
+      this.setState({
+        listItem: {
+          value: "",
+          completed: false,
+          id: ""
+        }
+      });
+    }
   };
 
   onChangeHandler = event => {
