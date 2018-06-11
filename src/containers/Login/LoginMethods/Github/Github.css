@@ -1,0 +1,11 @@
+.github-container{
+    height: 55px;
+    width: 300px;
+    padding: 10px 40px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor:pointer;
+}
