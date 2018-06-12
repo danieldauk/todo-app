@@ -1,17 +1,41 @@
-import React, { Component } from 'react';
-import {Route} from "react-router-dom";
-import './App.css';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Route, withRouter, Switch,Redirect } from "react-router-dom";
+import "./App.css";
 
 import Login from "./containers/Login/Login";
+import Tasks from "./containers/Tasks/Tasks";
 
 class App extends Component {
+
   render() {
+    let routes = (
+      <Switch>
+        <Route path="/" exact component={Login} />
+        <Redirect to="/" />
+      </Switch>
+    );
+
+    if (this.props.token){
+      routes = (
+        <Switch>
+        <Route path="/tasks" exact component={Tasks} />
+        <Redirect to="/tasks" />
+      </Switch>
+      );
+    }
     return (
       <div className="App">
-        <Route path="/" exact component={Login}/>
+        {routes}
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    token: state.token
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(App));

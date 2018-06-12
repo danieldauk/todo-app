@@ -18,6 +18,33 @@ export const googleAuth = () => {
   };
 };
 
+export const facebookAuth = () => {
+  return dispatch => {
+    const provider = new firebase.auth.FacebookAuthProvider();
+    dispatch(auth(provider));
+  };
+};
+
+export const anonymousAuth = () => {
+  return dispatch => {
+    app.auth().onAuthStateChanged((user) => {
+      if (user.isAnonymous) {
+        // User is signed in.
+        let token = user.qa;
+        const uid = user.uid;
+        dispatch(authSuccess(token));
+      } 
+    });
+    app.auth().signInAnonymously().catch((error)=> {
+ 
+      const errorMessage = error.message;
+      dispatch(authFail(errorMessage));
+      console.log(errorMessage)
+    });
+ 
+  };
+};
+
 export const auth = provider => {
   return dispatch => {
     app
@@ -27,8 +54,7 @@ export const auth = provider => {
         // This gives you a GitHub Access Token. You can use it to access the GitHub API.
         const token = result.credential.accessToken;
         // The signed-in user info.
-        const user = result.user;
-        console.log(user.uid);
+        const userId= result.user.uid;
         dispatch(authSuccess(token));
       })
       .catch(error => {
