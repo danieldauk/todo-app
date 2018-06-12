@@ -1,13 +1,26 @@
 import firebase from "firebase";
 import firebaseConfig from "../Firebase/firebaseConfig";
+import * as actionTypes from "./actionTypes";
+
+const app = firebase.initializeApp(firebaseConfig);
 
 export const githubAuth = () => {
   return dispatch => {
-    const app = firebase.initializeApp(firebaseConfig);
-
     const provider = new firebase.auth.GithubAuthProvider();
+    dispatch(auth(provider));
+  };
+};
 
-    firebase
+export const googleAuth = () => {
+  return dispatch => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    dispatch(auth(provider));
+  };
+};
+
+export const auth = provider => {
+  return dispatch => {
+    app
       .auth()
       .signInWithPopup(provider)
       .then(result => {
@@ -15,20 +28,26 @@ export const githubAuth = () => {
         const token = result.credential.accessToken;
         // The signed-in user info.
         const user = result.user;
-
-        console.log(token);
-        console.log(user);
+        console.log(user.uid);
+        dispatch(authSuccess(token));
       })
       .catch(error => {
-        // Handle Errors here.
-        const errorCode = error.code;
         const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        const credential = error.credential;
-
+        dispatch(authFail(errorMessage));
         console.log(errorMessage);
       });
+  };
+};
+
+export const authSuccess = token => {
+  return {
+    type: actionTypes.AUTH_SUCCESS,
+    token
+  };
+};
+export const authFail = errorMessage => {
+  return {
+    type: actionTypes.AUTH_FAIL,
+    errorMessage
   };
 };
