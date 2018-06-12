@@ -8,11 +8,19 @@ export const addTask = (task, userId) => {
   return dispatch => {
     const taskObj = {
       task,
-      completed: false
+      completed: false,
+      id: new Date().getTime()
     };
 
     const userTasksRef = app.database().ref(userId);
-    userTasksRef.push(taskObj);
+    userTasksRef.push(taskObj).then(()=>{
+      const tasks = app.database().ref().orderByChild(userId);
+      console.log(tasks);
+    });
+
+    //in callback of push
+    
+  
 
     //dispatch({ type: actionTypes.ADD_TASK, tasks });
   };
