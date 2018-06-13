@@ -26,8 +26,6 @@ class Tasks extends Component {
     this.setState({ task: "" });
   };
 
-
-
   render() {
     let tasks = this.props.tasks.map(task => {
       return (
@@ -42,20 +40,22 @@ class Tasks extends Component {
     });
 
     return (
-      <div className="tasks-container">
-      <Header clicked={this.props.logout}/>
-        <div className="form-container">
-          <form onSubmit={this.formSubmitHandler}>
-            <input
-              value={this.state.task}
-              type="text"
-              placeholder="What needs to be done?"
-              required
-              onChange={this.inputChangeHandler}
-            />
-          </form>
+      <div className="tasks-page">
+        <Header clicked={this.props.logout} />
+        <div className="tasks-container">
+          <div className="form-container">
+            <form onSubmit={this.formSubmitHandler}>
+              <input
+                value={this.state.task}
+                type="text"
+                placeholder="What needs to be done?"
+                required
+                onChange={this.inputChangeHandler}
+              />
+            </form>
+          </div>
+          <div className="task-list-container">{tasks}</div>
         </div>
-        <div className="task-list-container">{tasks}</div>
       </div>
     );
   }
@@ -65,7 +65,7 @@ const mapDispatchToProps = dispatch => {
   return {
     addTask: (task, userId) => dispatch(actions.addTask(task, userId)),
     updateTasks: userId => dispatch(actions.updateTasks(userId)),
-    logout: ()=>dispatch(actions.logout())
+    logout: () => dispatch(actions.logout())
   };
 };
 

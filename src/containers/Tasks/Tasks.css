@@ -1,8 +1,44 @@
-.tasks-container{
-    min-height: 100vh;
-    width: 100%;
+.tasks-page{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.tasks-container{
+    height: 500px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px #A7EAFF;
+}
+
+.form-container{
+        height: 120px;
+        width: 500px;
+        background: linear-gradient(to right, #1DE9FF, #3ECEFF);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}
+
+.form-container input {
+    background: none;
+    color: #F0FCFF;
+    border: none;
+    border-bottom: 1px solid rgba(240, 252, 255, 0.7);
+    font-size: 25px;
+    font-weight: 300;
+    font-family: inherit;
+    padding: 0px 20px;
+}
+
+.form-container input::placeholder {
+    color: #F0FCFF;
+    font-weight: 100;
+}
+
+.task-list-container{
+    height: 100%;
+    background: #F0FCFF;
+    width: 500px;
 }

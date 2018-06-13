@@ -1,3 +1,50 @@
 .task-container{
     display:flex;
+    height: 95px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    box-sizing: border-box;
 }
+
+.task-container input {
+    background: none;
+    border: none;
+    color:#6A6767;
+    font-size: 25px;
+    font-family: inherit;
+}
+
+
+.task-value{
+    color:#6A6767;
+    font-size: 25px;
+    
+}
+.task-container button{
+    background: none;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    box-shadow: 0px 0px 10px rgba(209, 208, 208, 0.5);
+}
+
+.task-edit-container{
+    position: relative;
+}
+
+.task-edit-container button{
+    cursor: pointer;
+}
+
+.task-edit-container button:first-child{
+    position: absolute;
+    z-index: -1;
+}
+.task-edit-container button:last-child{
+    position: absolute;
+    z-index: -2;
+}
+

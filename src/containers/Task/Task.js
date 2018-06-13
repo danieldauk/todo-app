@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions";
 
+import * as Octicons from "react-icons/lib/go";
+
 import "./Task.css";
 
 class Task extends Component {
@@ -30,47 +32,49 @@ class Task extends Component {
     this.setState({ value: event.target.value });
   };
 
-  checkHandler = () =>{
-    this.setState(prevState=>{
-        this.props.modifyTask(
-            this.props.id,
-            this.props.userId,
-            this.state.value,
-            !prevState.completed
-          );
-        return{completed: !prevState.completed}
+  checkHandler = () => {
+    this.setState(prevState => {
+      this.props.modifyTask(
+        this.props.id,
+        this.props.userId,
+        this.state.value,
+        !prevState.completed
+      );
+      return { completed: !prevState.completed };
     });
-    
-}
+  };
 
   render() {
+    const checkStyle = {
+      height: "30px",
+      width: "30px",
+      fill: "#3ECEFF"
+    };
+
+    const iconStyle = {
+      height: "25px",
+      width: "25px",
+      fill: "#3ECEFF"
+    };
     let task = (
       <div className="task-container">
-        <button onClick={this.checkHandler}>Checkr: {String(this.props.completed)}</button>
-        <div>{this.props.value}</div>
-        <button onClick={this.editModeHandler}>Edit</button>
-        <button
-          onClick={() =>
-            this.props.removeTask(this.props.id, this.props.userId)
-          }
-        >
-          Remove
+        <div className="task-value">{this.props.value}</div>
+        <button onClick={this.editModeHandler}>
+          {<Octicons.GoPencil style={iconStyle} />}
         </button>
       </div>
     );
 
     if (this.state.edit) {
       task = (
-        <div className="task-container">
-          <form onSubmit={this.editModeHandler}>
-            <input
-              onChange={this.inputChangeHandler}
-              type="text"
-              value={this.state.value}
-            />{" "}
-            <button>Exit edit</button>
-          </form>
-        </div>
+        <form className="task-container" onSubmit={this.editModeHandler}>
+          <input
+            onChange={this.inputChangeHandler}
+            type="text"
+            value={this.state.value}
+          />{" "}
+          <button>Exit edit</button>
+        </form>
       );
     }
 
