@@ -45,6 +45,12 @@ class Task extends Component {
   };
 
   render() {
+    //icons;
+    //GoCheck
+    //GoPencil
+    //GoTrachcan
+    //GoX
+
     const checkStyle = {
       height: "30px",
       width: "30px",
