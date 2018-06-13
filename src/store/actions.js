@@ -30,7 +30,7 @@ export const modifyTask = (taskId, userId, value, completed) => {
 
 export const updateTasks = userId => {
   return dispatch => {
-    const rootRef = app
+    app
       .database()
       .ref(userId)
       .once("value", snapshot => {
@@ -80,10 +80,9 @@ export const addTask = (task, userId) => {
   };
 };
 
-export const updateStore = (token, userId) => {
+export const updateStore = userId => {
   return {
     type: actionTypes.UPDATE_STORE,
-    token,
     userId
   };
 };
@@ -109,14 +108,47 @@ export const facebookAuth = () => {
   };
 };
 
+export const emailAndPasswordAuth = (email, password, login) => {
+  
+console.log(login);
+  return dispatch => {
+    if (login) {
+      console.log("logging in");
+      app
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(response => {
+          const userId = response.user.uid;
+          dispatch(authSuccess(userId));
+        })
+        .catch(function(error) {
+          const errorMessage = error.message;
+          console.log(errorMessage);
+        });
+    } else {
+      app
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(response => {
+          const userId = response.user.uid;
+          dispatch(authSuccess(userId));
+
+          //implement log in (not sign in)
+        })
+        .catch(function(error) {
+          const errorMessage = error.message;
+          console.log(errorMessage);
+        });
+    }
+  };
+};
+
 export const anonymousAuth = () => {
   return dispatch => {
     app.auth().onAuthStateChanged(user => {
       if (user.isAnonymous) {
-        // User is signed in.
-        const token = user.qa;
         const userId = user.uid;
-        dispatch(authSuccess(token, userId));
+        dispatch(authSuccess(userId));
       }
     });
     app
@@ -136,11 +168,8 @@ export const auth = provider => {
       .auth()
       .signInWithPopup(provider)
       .then(result => {
-        // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-        const token = result.credential.accessToken;
-        // The signed-in user info.
         const userId = result.user.uid;
-        dispatch(authSuccess(token, userId));
+        dispatch(authSuccess(userId));
       })
       .catch(error => {
         const errorMessage = error.message;
@@ -150,14 +179,12 @@ export const auth = provider => {
   };
 };
 
-export const authSuccess = (token, userId) => {
+export const authSuccess = userId => {
   console.log(userId);
-  localStorage.setItem("token", token);
   localStorage.setItem("userId", userId);
 
   return {
     type: actionTypes.AUTH_SUCCESS,
-    token,
     userId
   };
 };
@@ -168,10 +195,9 @@ export const authFail = errorMessage => {
   };
 };
 
-export const logout = ()=>{
-  localStorage.removeItem("token");
+export const logout = () => {
   localStorage.removeItem("userId");
   return {
     type: actionTypes.LOGOUT
-  }
-}
+  };
+};

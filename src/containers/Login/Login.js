@@ -4,10 +4,11 @@ import * as actions from "../../store/actions";
 
 import "./Login.css";
 import OAuth from "../../components/LoginMethods/OAuth/OAuth";
+import Email from "../../components/LoginMethods/Email/Email";
 
 class Login extends Component {
   componentDidUpdate() {
-    if (this.props.token !== "") {
+    if (this.props.userId !== "") {
       this.props.history.push("/tasks");
     }
   }
@@ -20,29 +21,30 @@ class Login extends Component {
           <OAuth provider="Google" clicked={this.props.googleAuth} />
           <OAuth provider="Facebook" clicked={this.props.facebookAuth} />
           <OAuth provider="Anonymous" clicked={this.props.anonymousAuth} />
+          <Email emailAndPasswordAuth={this.props.emailAndPasswordAuth} />
         </div>
       </div>
     );
   }
 }
 
-
-const mapStateToProps = state =>{
-    return {
-        token: state.token
-    }
-}
+const mapStateToProps = state => {
+  return {
+    userId: state.userId
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
     githubAuth: () => dispatch(actions.githubAuth()),
     googleAuth: () => dispatch(actions.googleAuth()),
     facebookAuth: () => dispatch(actions.facebookAuth()),
-    anonymousAuth: () => dispatch(actions.anonymousAuth())
+    anonymousAuth: () => dispatch(actions.anonymousAuth()),
+    emailAndPasswordAuth: (email,password, login) => dispatch(actions.emailAndPasswordAuth(email, password, login))
   };
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Login);

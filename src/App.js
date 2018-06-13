@@ -10,10 +10,9 @@ import * as actions from "./store/actions";
 
 class App extends Component {
   componentDidMount() {
-    const token = localStorage.getItem("token");
     const userId = localStorage.getItem("userId");
-    if (token) {
-      this.props.updateStore(token, userId);
+    if (userId) {
+      this.props.updateStore(userId);
     }
   }
 
@@ -25,7 +24,7 @@ class App extends Component {
       </Switch>
     );
 
-    if (this.props.token) {
+    if (this.props.userId) {
       routes = (
         <Switch>
           <Route path="/tasks" exact component={Tasks} />
@@ -39,13 +38,13 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    token: state.token
+    userId: state.userId
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateStore: (token, userId) => dispatch(actions.updateStore(token,userId))
+    updateStore: (userId) => dispatch(actions.updateStore(userId))
   };
 };
 

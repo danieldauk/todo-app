@@ -1,7 +1,6 @@
 import * as actionTypes from "./actionTypes";
 
 const initialState = {
-  token: "",
   error: false,
   errorMessage: "",
   userId: "",
@@ -11,7 +10,6 @@ const initialState = {
 const authSuccess = (state, action) => {
   return {
     ...state,
-    token: action.token,
     userId: action.userId
   };
 };
@@ -27,7 +25,6 @@ const authFail = (state, action) => {
 const updateStore = (state, action) => {
   return {
     ...state,
-    token: action.token,
     userId: action.userId
   };
 };
@@ -81,7 +78,6 @@ const modifyTask = (state, action) => {
 
 const logout = () => {
   return {
-    token: "",
     error: false,
     errorMessage: "",
     userId: "",
