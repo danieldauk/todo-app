@@ -79,6 +79,16 @@ const modifyTask = (state, action) => {
   };
 };
 
+const logout = () => {
+  return {
+    token: "",
+    error: false,
+    errorMessage: "",
+    userId: "",
+    tasks: []
+  };
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_SUCCESS:
@@ -95,6 +105,8 @@ const reducer = (state = initialState, action) => {
       return removeTask(state, action);
     case actionTypes.MODIFY_TASK:
       return modifyTask(state, action);
+    case actionTypes.LOGOUT:
+      return logout();
     default:
       return state;
   }

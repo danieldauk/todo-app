@@ -167,3 +167,11 @@ export const authFail = errorMessage => {
     errorMessage
   };
 };
+
+export const logout = ()=>{
+  localStorage.removeItem("token");
+  localStorage.removeItem("userId");
+  return {
+    type: actionTypes.LOGOUT
+  }
+}

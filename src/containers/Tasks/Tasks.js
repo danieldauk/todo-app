@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Task from "../Task/Task";
+import Header from "../../components/Header/Header";
 
 import * as actions from "../../store/actions";
 
@@ -42,6 +43,7 @@ class Tasks extends Component {
 
     return (
       <div className="tasks-container">
+      <Header clicked={this.props.logout}/>
         <div className="form-container">
           <form onSubmit={this.formSubmitHandler}>
             <input
@@ -62,7 +64,8 @@ class Tasks extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     addTask: (task, userId) => dispatch(actions.addTask(task, userId)),
-    updateTasks: userId => dispatch(actions.updateTasks(userId))
+    updateTasks: userId => dispatch(actions.updateTasks(userId)),
+    logout: ()=>dispatch(actions.logout())
   };
 };
 
