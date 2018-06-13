@@ -1,7 +1,5 @@
 import * as actionTypes from "./actionTypes";
 
-
-
 const initialState = {
   token: "",
   error: false,
@@ -27,7 +25,6 @@ const authFail = (state, action) => {
 };
 
 const updateStore = (state, action) => {
-  console.log(action);
   return {
     ...state,
     token: action.token,
@@ -35,12 +32,52 @@ const updateStore = (state, action) => {
   };
 };
 
-const addTask = (state,action) =>{
+const addTask = (state, action) => {
+  const updatedTasksArr = [...state.tasks];
+  updatedTasksArr.push(action.task);
+
   return {
     ...state,
-    tasks: action.tasks
+    tasks: updatedTasksArr
+  };
+};
+
+const removeTask = (state, action) => {
+  const updatedTasksArr = state.tasks.filter(task => {
+    return task.id !== action.taskId;
+  });
+
+  return {
+    ...state,
+    tasks: updatedTasksArr
+  };
+};
+
+const updateTasks = (state, action) => {
+  const tasks = [];
+  for (let task in action.data) {
+    tasks.push(action.data[task]);
   }
-}
+  return {
+    ...state,
+    tasks
+  };
+};
+
+const modifyTask = (state, action) => {
+  const tasks = [...state.tasks];
+  const modifiedTasks = tasks.map(task => {
+    if (task.id === action.modifiedTask.id) {
+      return action.modifiedTask;
+    } else {
+      return task;
+    }
+  });
+  return {
+    ...state,
+    tasks: modifiedTasks
+  };
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -51,7 +88,13 @@ const reducer = (state = initialState, action) => {
     case actionTypes.UPDATE_STORE:
       return updateStore(state, action);
     case actionTypes.ADD_TASK:
-    return addTask(state,action);
+      return addTask(state, action);
+    case actionTypes.UPDATE_TASKS:
+      return updateTasks(state, action);
+    case actionTypes.REMOVE_TASK:
+      return removeTask(state, action);
+    case actionTypes.MODIFY_TASK:
+      return modifyTask(state, action);
     default:
       return state;
   }

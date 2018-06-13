@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Task from "../Task/Task";
 
 import * as actions from "../../store/actions";
 
@@ -10,6 +11,10 @@ class Tasks extends Component {
     task: ""
   };
 
+  componentDidMount() {
+    this.props.updateTasks(this.props.userId);
+  }
+
   inputChangeHandler = event => {
     this.setState({ task: event.target.value });
   };
@@ -17,20 +22,30 @@ class Tasks extends Component {
   formSubmitHandler = event => {
     event.preventDefault();
     this.props.addTask(this.state.task, this.props.userId);
-    this.setState({task: ""});
+    this.setState({ task: "" });
   };
+
+
 
   render() {
     let tasks = this.props.tasks.map(task => {
-      return <div>{task.name}</div>;
+      return (
+        <Task
+          userId={this.props.userId}
+          completed={task.completed}
+          value={task.value}
+          id={task.id}
+          key={task.id}
+        />
+      );
     });
 
     return (
       <div className="tasks-container">
-        <div>
+        <div className="form-container">
           <form onSubmit={this.formSubmitHandler}>
             <input
-                value={this.state.task}
+              value={this.state.task}
               type="text"
               placeholder="What needs to be done?"
               required
@@ -38,6 +53,7 @@ class Tasks extends Component {
             />
           </form>
         </div>
+        <div className="task-list-container">{tasks}</div>
       </div>
     );
   }
@@ -45,7 +61,8 @@ class Tasks extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addTask: (task, userId) => dispatch(actions.addTask(task, userId))
+    addTask: (task, userId) => dispatch(actions.addTask(task, userId)),
+    updateTasks: userId => dispatch(actions.updateTasks(userId))
   };
 };
 
@@ -56,4 +73,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(Tasks);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Tasks);

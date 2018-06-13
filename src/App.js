@@ -12,7 +12,6 @@ class App extends Component {
   componentDidMount() {
     const token = localStorage.getItem("token");
     const userId = localStorage.getItem("userId");
-    console.log(userId);
     if (token) {
       this.props.updateStore(token, userId);
     }
