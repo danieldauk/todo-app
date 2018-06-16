@@ -4,3 +4,8 @@ body {
   font-family: 'Roboto', sans-serif;
   outline: none;
 }
+
+body input,
+body button {
+  outline: none;
+}

@@ -109,8 +109,7 @@ export const facebookAuth = () => {
 };
 
 export const emailAndPasswordAuth = (email, password, login) => {
-  
-console.log(login);
+  console.log(login);
   return dispatch => {
     if (login) {
       console.log("logging in");
@@ -145,15 +144,13 @@ console.log(login);
 
 export const anonymousAuth = () => {
   return dispatch => {
-    app.auth().onAuthStateChanged(user => {
-      if (user.isAnonymous) {
-        const userId = user.uid;
-        dispatch(authSuccess(userId));
-      }
-    });
     app
       .auth()
       .signInAnonymously()
+      .then(response => {
+        const userId = response.user.uid;
+        dispatch(authSuccess(userId));
+      })
       .catch(error => {
         const errorMessage = error.message;
         dispatch(authFail(errorMessage));
@@ -197,6 +194,7 @@ export const authFail = errorMessage => {
 
 export const logout = () => {
   localStorage.removeItem("userId");
+  app.auth().signOut();
   return {
     type: actionTypes.LOGOUT
   };
