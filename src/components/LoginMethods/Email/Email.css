@@ -1,0 +1,57 @@
+.email {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.email__controls {
+  width: 100%;
+}
+
+.email__controls button {
+  width: 50%;
+  height: 40px;
+  background: #f0fcff;
+  color: #6a6767;
+  border: none;
+  cursor: pointer;
+}
+
+.email__controls .email__controls--active {
+  background: #3eceff;
+  color: #f0fcff;
+}
+
+.email__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.email__form input {
+  background: none;
+  border: 1px solid rgba(240, 252, 255, 0.5);
+  color: #f0fcff;
+  width: 100%;
+  margin-top: 20px;
+  padding-left: 10px;
+  box-sizing: border-box;
+  height: 30px;
+}
+
+.email__form input::placeholder {
+  color: #f0fcff;
+}
+
+.email__form button {
+    width: 100%;
+    height: 30px;
+    border: none;
+    margin-top: 20px;
+    background: #3eceff;
+    cursor: pointer;
+    color: #f0fcff;
+}

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Email.css";
 
 class Email extends Component {
   state = {
@@ -37,12 +38,22 @@ class Email extends Component {
 
   render() {
     return (
-      <div>
-        <div>
-          <button onClick={this.signupHandler}>Sign up</button>
-          <button onClick={this.loginHandler}>Log in</button>
+      <div className="email">
+        <div className="email__controls">
+          <button
+            className={this.state.login ? null : "email__controls--active"}
+            onClick={this.signupHandler}
+          >
+            Sign up
+          </button>
+          <button
+            className={this.state.login ? "email__controls--active" : null}
+            onClick={this.loginHandler}
+          >
+            Log in
+          </button>
         </div>
-        <form onSubmit={this.submitHandler}>
+        <form className="email__form" onSubmit={this.submitHandler}>
           <input
             onChange={this.emailHandler}
             type="email"

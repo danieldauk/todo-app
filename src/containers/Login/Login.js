@@ -14,14 +14,16 @@ class Login extends Component {
   }
   render() {
     return (
-      <div className="login-container">
-        <h3>Sign in</h3>
-        <div className="login-methods-container">
-          <OAuth provider="Github" clicked={this.props.githubAuth} />
-          <OAuth provider="Google" clicked={this.props.googleAuth} />
-          <OAuth provider="Facebook" clicked={this.props.facebookAuth} />
-          <OAuth provider="Anonymous" clicked={this.props.anonymousAuth} />
+      <div className="login">
+        <div className="login-container">
           <Email emailAndPasswordAuth={this.props.emailAndPasswordAuth} />
+          <div className="login-methods-container">
+            <OAuth provider="Github" clicked={this.props.githubAuth} />
+            <OAuth provider="Google" clicked={this.props.googleAuth} />
+            <OAuth provider="Facebook" clicked={this.props.facebookAuth} />
+            <OAuth provider="Anonymous" clicked={this.props.anonymousAuth} />
+            
+          </div>
         </div>
       </div>
     );
@@ -40,7 +42,8 @@ const mapDispatchToProps = dispatch => {
     googleAuth: () => dispatch(actions.googleAuth()),
     facebookAuth: () => dispatch(actions.facebookAuth()),
     anonymousAuth: () => dispatch(actions.anonymousAuth()),
-    emailAndPasswordAuth: (email,password, login) => dispatch(actions.emailAndPasswordAuth(email, password, login))
+    emailAndPasswordAuth: (email, password, login) =>
+      dispatch(actions.emailAndPasswordAuth(email, password, login))
   };
 };
 

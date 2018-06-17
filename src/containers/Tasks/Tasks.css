@@ -1,45 +1,92 @@
-.tasks-page{
+.tasks{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    min-height: 100vh;
+}
+
+.tasks-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 60px);
+}
+
+.tasks-container {
+  height: 500px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px #a7eaff;
+}
+
+.form-container {
+  height: 120px;
+  width: 500px;
+  background: linear-gradient(to right, #1de9ff, #3eceff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.form-container form {
+    height: 100px;
+    display:flex;
     align-items: center;
 }
-
-.tasks-container{
-    height: 500px;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 15px 40px #A7EAFF;
+.tasks__filters{
+    height: 20px;
+    width: 100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.form-container{
-        height: 120px;
-        width: 500px;
-        background: linear-gradient(to right, #1DE9FF, #3ECEFF);
-        display: flex;
-        justify-content: center;
-        align-items: center;
+.tasks__filters a{
+    color: #f0fcff;
+    text-decoration: none;
+    font-weight: 300;
+    padding: 0px 15px;
 }
 
 .form-container input {
-    background: none;
-    color: #F0FCFF;
-    border: none;
-    border-bottom: 1px solid rgba(240, 252, 255, 0.7);
-    font-size: 25px;
-    font-weight: 300;
-    font-family: inherit;
-    padding: 0px 20px;
+  background: none;
+  color: #f0fcff;
+  border: none;
+  border-bottom: 1px solid rgba(240, 252, 255, 0.7);
+  font-size: 25px;
+  font-weight: 300;
+  font-family: inherit;
+  padding: 0px 20px;
 }
 
 .form-container input::placeholder {
-    color: #F0FCFF;
-    font-weight: 100;
+  color: #f0fcff;
+  font-weight: 100;
 }
 
-.task-list-container{
-    height: 380px;
-    background: #F0FCFF;
-    width: 500px;
-    overflow: auto;
+.task-list-container {
+  height: 380px;
+  background: #f0fcff;
+  width: 500px;
+  overflow: auto;
+}
+
+.slide-enter {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: 0.3s;
+}
+
+.slide-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide-exit {
+}
+
+.slide-exit-active {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: 0.3s;
 }

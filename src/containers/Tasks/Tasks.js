@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
+import CSSTransition from "react-transition-group/CSSTransition";
+import TransitionGroup from "react-transition-group/TransitionGroup";
 import Task from "../Task/Task";
 import Header from "../../components/Header/Header";
 
@@ -26,35 +29,114 @@ class Tasks extends Component {
     this.setState({ task: "" });
   };
 
-  render() {
-    let tasks = this.props.tasks.map(task => {
-      return (
-        <Task
-          userId={this.props.userId}
-          completed={task.completed}
-          value={task.value}
-          id={task.id}
-          key={task.id}
-        />
-      );
-    });
-
-    return (
-      <div className="tasks-page">
-        <Header clicked={this.props.logout} />
-        <div className="tasks-container">
-          <div className="form-container">
-            <form onSubmit={this.formSubmitHandler}>
-              <input
-                value={this.state.task}
-                type="text"
-                placeholder="What needs to be done?"
-                required
-                onChange={this.inputChangeHandler}
+  renderTasks = () => {
+    return this.props.tasks.map(task => {
+      if (this.props.location.search === "?tasks=completed") {
+        if (task.completed) {
+          return (
+            <CSSTransition key={task.id} classNames="slide" timeout={300}>
+              <Task
+                userId={this.props.userId}
+                completed={task.completed}
+                value={task.value}
+                id={task.id}
               />
-            </form>
+            </CSSTransition>
+          );
+        }
+      } else if (this.props.location.search === "?tasks=active") {
+        if (!task.completed) {
+          return (
+            <CSSTransition key={task.id} classNames="slide" timeout={300}>
+              <Task
+                userId={this.props.userId}
+                completed={task.completed}
+                value={task.value}
+                id={task.id}
+              />
+            </CSSTransition>
+          );
+        }
+      } else {
+        return (
+          <CSSTransition key={task.id} classNames="slide" timeout={300}>
+            <Task
+              userId={this.props.userId}
+              completed={task.completed}
+              value={task.value}
+              id={task.id}
+            />
+          </CSSTransition>
+        );
+      }
+    });
+  };
+
+  render() {
+    return (
+      <div className="tasks">
+        <Header clicked={this.props.logout} />
+        <div className="tasks-page">
+          <div className="tasks-container">
+            <div className="form-container">
+              <form onSubmit={this.formSubmitHandler}>
+                <input
+                  value={this.state.task}
+                  type="text"
+                  placeholder="What needs to be done?"
+                  required
+                  onChange={this.inputChangeHandler}
+                />
+              </form>
+              <div className="tasks__filters">
+                <NavLink
+                  style={
+                    this.props.location.search === ""
+                      ? {
+                          textDecoration: "underline",
+                          fontWeight: "700"
+                        }
+                      : null
+                  }
+                  exact
+                  to={{ pathname: "/tasks" }}
+                >
+                  All
+                </NavLink>
+                <NavLink
+                  style={
+                    this.props.location.search === "?tasks=active"
+                      ? {
+                          textDecoration: "underline",
+                          fontWeight: "700"
+                        }
+                      : null
+                  }
+                  exact
+                  to={{ pathname: "/tasks", search: "?tasks=active" }}
+                >
+                  Active
+                </NavLink>
+                <NavLink
+                  style={
+                    this.props.location.search === "?tasks=completed"
+                      ? {
+                          textDecoration: "underline",
+                          fontWeight: "700"
+                        }
+                      : null
+                  }
+                  exact
+                  to={{ pathname: "/tasks", search: "?tasks=completed" }}
+                >
+                  Completed
+                </NavLink>
+              </div>
+            </div>
+            <TransitionGroup className="task-list-container">
+              {this.renderTasks()}
+            </TransitionGroup>
           </div>
-          <div className="task-list-container">{tasks}</div>
         </div>
       </div>
     );

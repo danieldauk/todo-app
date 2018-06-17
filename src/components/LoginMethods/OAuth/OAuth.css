@@ -1,11 +1,29 @@
-.oauth-container{
-    height: 55px;
-    width: 300px;
-    padding: 10px 40px;
-    box-sizing: border-box;
-    border: 1px solid black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor:pointer;
+.oauth {
+  height: 40px;
+  width: 300px;
+  box-sizing: border-box;
+  border: 1px solid rgba(240, 252, 255, 0.5);
+  cursor: pointer;
+  margin-top: 20px;
+  align-content: center;
+  color: rgb(240, 252, 255);
+  display: grid;
+  grid-template-columns: 25px 100px;
+  justify-content: center;
+  align-items: center;
+}
+
+.oauth p {
+  text-align: center;
+  margin: 0;
+}
+
+.oauth__logo {
+  display: flex;
+  align-items: center;
+}
+
+.oauth__logo svg{
+    height: 20px;
+    width: 20px;
 }
