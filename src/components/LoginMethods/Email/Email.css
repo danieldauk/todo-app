@@ -10,7 +10,7 @@
   width: 100%;
 }
 
-.email__controls button {
+.email__controls__button {
   width: 50%;
   height: 40px;
   background: #f0fcff;
@@ -19,7 +19,11 @@
   cursor: pointer;
 }
 
-.email__controls .email__controls--active {
+.email__controls__button--active {
+  width: 50%;
+  height: 40px;
+  border: none;
+  cursor: pointer;
   background: #0abbf7;
   color: #f0fcff;
 }
@@ -31,7 +35,7 @@
   width: 100%;
 }
 
-.email__form input {
+.email__form__input {
   background: none;
   border: 1px solid rgba(240, 252, 255, 0.5);
   color: #f0fcff;
@@ -43,15 +47,15 @@
   transition: 0.3s;
 }
 
-.email__form input:focus{
+.email__form__input:focus{
   transform: scale(1.05);
 }
 
-.email__form input::placeholder {
+.email__form__input::placeholder {
   color: #f0fcff;
 }
 
-.email__form button {
+.email__form__button {
     width: 100%;
     height: 30px;
     border: none;
@@ -62,6 +66,6 @@
     transition: 0.2s;
 }
 
-.email__form button:hover {
+.email__form__button:hover {
   transform: scale(1.05);
 }

@@ -41,13 +41,13 @@ class Email extends Component {
       <div className="email">
         <div className="email__controls">
           <button
-            className={this.state.login ? null : "email__controls--active"}
+            className={this.state.login ? "email__controls__button" : "email__controls__button--active"}
             onClick={this.signupHandler}
           >
             Sign up
           </button>
           <button
-            className={this.state.login ? "email__controls--active" : null}
+            className={this.state.login ? "email__controls__button--active" : "email__controls__button"}
             onClick={this.loginHandler}
           >
             Log in
@@ -55,18 +55,22 @@ class Email extends Component {
         </div>
         <form className="email__form" onSubmit={this.submitHandler}>
           <input
+          className="email__form__input"
             onChange={this.emailHandler}
             type="email"
             required
             placeholder="Email"
           />
           <input
+          className="email__form__input"
             onChange={this.passwordHandler}
             type="password"
             required
             placeholder="Password"
           />
-          <button>Submit</button>
+          <button
+          className="email__form__button"
+          >Submit</button>
         </form>
       </div>
     );
