@@ -4,18 +4,15 @@
     align-items: center;
     min-height: 100vh;
     width: 100%;
+    background: linear-gradient(to bottom right, #1de9ff, #3eceff);
 }
 
-.login-container{
+.login__container{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background: linear-gradient(to bottom right, #1de9ff, #3eceff);
     padding: 20px;
     box-sizing: border-box;
-}
-
-.login-methods-container{
-
+    background: rgba(0,0,0,0.1);
 }

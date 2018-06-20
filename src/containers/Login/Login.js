@@ -15,9 +15,9 @@ class Login extends Component {
   render() {
     return (
       <div className="login">
-        <div className="login-container">
+        <div className="login__container">
           <Email emailAndPasswordAuth={this.props.emailAndPasswordAuth} />
-          <div className="login-methods-container">
+          <div >
             <OAuth provider="Github" clicked={this.props.githubAuth} />
             <OAuth provider="Google" clicked={this.props.googleAuth} />
             <OAuth provider="Facebook" clicked={this.props.facebookAuth} />

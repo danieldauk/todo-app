@@ -11,6 +11,11 @@
   grid-template-columns: 25px 100px;
   justify-content: center;
   align-items: center;
+  transition: 0.2s;
+}
+
+.oauth:hover{
+  transform: scale(1.05);
 }
 
 .oauth p {

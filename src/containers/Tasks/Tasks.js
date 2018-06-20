@@ -76,11 +76,12 @@ class Tasks extends Component {
     return (
       <div className="tasks">
         <Header clicked={this.props.logout} />
-        <div className="tasks-page">
-          <div className="tasks-container">
-            <div className="form-container">
-              <form onSubmit={this.formSubmitHandler}>
+        <div className="tasks__main">
+          <div className="tasks__container">
+            <div className="tasks__form__container">
+              <form className="tasks__form" onSubmit={this.formSubmitHandler}>
                 <input
+                className="tasks__form__input"
                   value={this.state.task}
                   type="text"
                   placeholder="What needs to be done?"
@@ -90,6 +91,7 @@ class Tasks extends Component {
               </form>
               <div className="tasks__filters">
                 <NavLink
+                className="tasks__filters__link"
                   style={
                     this.props.location.search === ""
                       ? {
@@ -104,6 +106,7 @@ class Tasks extends Component {
                   All
                 </NavLink>
                 <NavLink
+                className="tasks__filters__link"
                   style={
                     this.props.location.search === "?tasks=active"
                       ? {
@@ -118,6 +121,7 @@ class Tasks extends Component {
                   Active
                 </NavLink>
                 <NavLink
+                className="tasks__filters__link"
                   style={
                     this.props.location.search === "?tasks=completed"
                       ? {
@@ -133,7 +137,7 @@ class Tasks extends Component {
                 </NavLink>
               </div>
             </div>
-            <TransitionGroup className="task-list-container">
+            <TransitionGroup className="tasks__list__container">
               {this.renderTasks()}
             </TransitionGroup>
           </div>

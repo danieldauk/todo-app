@@ -20,7 +20,7 @@
 }
 
 .email__controls .email__controls--active {
-  background: #3eceff;
+  background: #0abbf7;
   color: #f0fcff;
 }
 
@@ -40,6 +40,11 @@
   padding-left: 10px;
   box-sizing: border-box;
   height: 30px;
+  transition: 0.3s;
+}
+
+.email__form input:focus{
+  transform: scale(1.05);
 }
 
 .email__form input::placeholder {
@@ -51,7 +56,12 @@
     height: 30px;
     border: none;
     margin-top: 20px;
-    background: #3eceff;
+    background: #0abbf7;
     cursor: pointer;
     color: #f0fcff;
+    transition: 0.2s;
+}
+
+.email__form button:hover {
+  transform: scale(1.05);
 }

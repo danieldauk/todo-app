@@ -159,6 +159,24 @@ export const anonymousAuth = () => {
   };
 };
 
+export const linkAccounts = (email, credential) => {
+  return dispatch => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    provider.setCustomParameters({ login_hint: email });
+    app
+      .auth()
+      .signInWithPopup(provider)
+      .then(response => {
+        response.user.linkAndRetrieveDataWithCredential(credential);
+        const userId = response.user.uid;
+        dispatch(authSuccess(userId));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+};
+
 export const auth = provider => {
   return dispatch => {
     app
@@ -172,6 +190,19 @@ export const auth = provider => {
         const errorMessage = error.message;
         dispatch(authFail(errorMessage));
         console.log(errorMessage);
+        console.log(error.email);
+        console.log(error);
+        console.log(error.credential);
+
+        if (error.code === "auth/account-exists-with-different-credential") {
+          const link = window.confirm(
+            "Account exists with different credential. Please sign in with Google account to link accounts"
+          );
+          if (link) {
+            //https://firebase.google.com/docs/auth/web/google-signin
+            dispatch(linkAccounts(error.email, error.credential));
+          }
+        }
       });
   };
 };

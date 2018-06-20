@@ -61,8 +61,9 @@ class Task extends Component {
       fill: "#3ECEFF"
     };
     return (
-      <form className="task-container" onSubmit={this.editModeHandler}>
+      <form className="task__form" onSubmit={this.editModeHandler}>
         <input
+        className="task__form__input"
           autoFocus
           style={
             this.state.completed
@@ -73,12 +74,18 @@ class Task extends Component {
           type="text"
           value={this.state.value}
         />{" "}
-        <div className="edit-buttons">
-          <button onClick={this.checkHandler}>
+        <div className="task__edit">
+          <button 
+          className="task__edit__button"
+          onClick={this.checkHandler}>
             {<Octicons.GoCheck style={iconStyle} />}
           </button>
-          <button>{<Octicons.GoX style={iconStyle} />}</button>
-          <button onClick={this.removeTaskHandler}>
+          <button
+          className="task__edit__button"
+          >{<Octicons.GoX style={iconStyle} />}</button>
+          <button 
+          className="task__edit__button"
+          onClick={this.removeTaskHandler}>
             {<Octicons.GoTrashcan style={iconStyle} />}
           </button>
         </div>
@@ -93,18 +100,20 @@ class Task extends Component {
       fill: "#3ECEFF"
     };
     return (
-      <div className="task-container">
+      <div className="task__form">
         <div
           style={
             this.state.completed
               ? { textDecoration: "line-through", opacity: 0.5 }
               : null
           }
-          className="task-value"
+          className="task__value"
         >
           {this.props.value}
         </div>
-        <button onClick={this.editModeHandler}>
+        <button
+        className="task__form__button"
+        onClick={this.editModeHandler}>
           {<Octicons.GoPencil style={iconStyle} />}
         </button>
       </div>
