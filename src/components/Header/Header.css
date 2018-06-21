@@ -32,6 +32,16 @@
 
 @media (max-width: 520px) {
   .header {
-    padding: 0px 10px;
+    padding: 0px 5px;
+  }
+  .header__button:hover {
+    transform: none;
+  }
+  .header__button svg {
+    height: 16px;
+    width: 16px;
+  }
+  .header__button {
+    font-size: 14px;
   }
 }

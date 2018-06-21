@@ -79,10 +79,10 @@ class Task extends Component {
         />{' '}
         <div className="task__edit">
           <button className="task__edit__button" onClick={this.checkHandler}>
-          <div className="task__iconfix">{<Octicons.GoCheck style={iconStyle} />}</div>
+            <div className="task__iconfix">{<Octicons.GoCheck style={iconStyle} />}</div>
           </button>
           <button className="task__edit__button">
-          <div className="task__iconfix">{<Octicons.GoX style={iconStyle} />}</div>
+            <div className="task__iconfix">{<Octicons.GoX style={iconStyle} />}</div>
           </button>
           <button className="task__edit__button" onClick={this.removeTaskHandler}>
             <div className="task__iconfix">{<Octicons.GoTrashcan style={iconStyle} />}</div>
@@ -107,7 +107,7 @@ class Task extends Component {
           {this.inputLengthHandler(this.props.value)}
         </div>
         <button className="task__form__button" onClick={this.editModeHandler}>
-        <div className="task__iconfix"> {<Octicons.GoPencil style={iconStyle} />}</div>
+          <div className="task__iconfix"> {<Octicons.GoPencil style={iconStyle} />}</div>
         </button>
       </div>
     );

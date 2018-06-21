@@ -99,7 +99,7 @@
 @media(max-width: 520px){
 
   .tasks__container{
-    height: calc(100vh - 60px);
+    height: calc(100vh - 30px);
     min-height: 350px;
   }
 
