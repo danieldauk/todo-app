@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Route, withRouter, Switch, Redirect } from "react-router-dom";
-import "./App.css";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
+import './App.css';
 
-import Login from "./containers/Login/Login";
-import Tasks from "./containers/Tasks/Tasks";
+import Login from './containers/Login/Login';
+import Tasks from './containers/Tasks/Tasks';
 
-import * as actions from "./store/actions";
+import * as actions from './store/actions';
 
 class App extends Component {
   componentDidMount() {
-    const userId = localStorage.getItem("userId");
+    const userId = localStorage.getItem('userId');
     if (userId) {
       this.props.updateStore(userId);
     }
@@ -36,21 +36,15 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    userId: state.userId
-  };
-};
+const mapStateToProps = state => ({
+  userId: state.userId,
+});
 
-const mapDispatchToProps = dispatch => {
-  return {
-    updateStore: (userId) => dispatch(actions.updateStore(userId))
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  updateStore: userId => dispatch(actions.updateStore(userId)),
+});
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(App)
-);
+export default withRouter(connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(App));

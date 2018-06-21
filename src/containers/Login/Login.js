@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import * as actions from "../../store/actions";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions';
 
-import "./Login.css";
-import OAuth from "../../components/LoginMethods/OAuth/OAuth";
-import Email from "../../components/LoginMethods/Email/Email";
+import './Login.css';
+import OAuth from '../../components/LoginMethods/OAuth/OAuth';
+import Email from '../../components/LoginMethods/Email/Email';
 
 class Login extends Component {
   componentDidUpdate() {
-    if (this.props.userId !== "") {
-      this.props.history.push("/tasks");
+    if (this.props.userId !== '') {
+      this.props.history.push('/tasks');
     }
   }
   render() {
@@ -17,12 +17,11 @@ class Login extends Component {
       <div className="login">
         <div className="login__container">
           <Email emailAndPasswordAuth={this.props.emailAndPasswordAuth} />
-          <div >
+          <div>
             <OAuth provider="Github" clicked={this.props.githubAuth} />
             <OAuth provider="Google" clicked={this.props.googleAuth} />
             <OAuth provider="Facebook" clicked={this.props.facebookAuth} />
             <OAuth provider="Anonymous" clicked={this.props.anonymousAuth} />
-            
           </div>
         </div>
       </div>
@@ -30,24 +29,20 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    userId: state.userId
-  };
-};
+const mapStateToProps = state => ({
+  userId: state.userId,
+});
 
-const mapDispatchToProps = dispatch => {
-  return {
-    githubAuth: () => dispatch(actions.githubAuth()),
-    googleAuth: () => dispatch(actions.googleAuth()),
-    facebookAuth: () => dispatch(actions.facebookAuth()),
-    anonymousAuth: () => dispatch(actions.anonymousAuth()),
-    emailAndPasswordAuth: (email, password, login) =>
-      dispatch(actions.emailAndPasswordAuth(email, password, login))
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  githubAuth: () => dispatch(actions.githubAuth()),
+  googleAuth: () => dispatch(actions.googleAuth()),
+  facebookAuth: () => dispatch(actions.facebookAuth()),
+  anonymousAuth: () => dispatch(actions.anonymousAuth()),
+  emailAndPasswordAuth: (email, password, login) =>
+    dispatch(actions.emailAndPasswordAuth(email, password, login)),
+});
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Login);

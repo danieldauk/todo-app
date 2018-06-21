@@ -1,28 +1,24 @@
-import React, { Component } from "react";
-import "./Email.css";
+import React, { Component } from 'react';
+import './Email.css';
 
 class Email extends Component {
   state = {
-    email: "",
-    password: "",
-    login: true
+    email: '',
+    password: '',
+    login: true,
   };
 
-  submitHandler = event => {
+  submitHandler = (event) => {
     event.preventDefault();
-    console.log("?");
-    this.props.emailAndPasswordAuth(
-      this.state.email,
-      this.state.password,
-      this.state.login
-    );
+    console.log('?');
+    this.props.emailAndPasswordAuth(this.state.email, this.state.password, this.state.login);
   };
 
-  emailHandler = event => {
+  emailHandler = (event) => {
     this.setState({ email: event.target.value });
   };
 
-  passwordHandler = event => {
+  passwordHandler = (event) => {
     this.setState({ password: event.target.value });
   };
 
@@ -41,13 +37,17 @@ class Email extends Component {
       <div className="email">
         <div className="email__controls">
           <button
-            className={this.state.login ? "email__controls__button" : "email__controls__button--active"}
+            className={
+              this.state.login ? 'email__controls__button' : 'email__controls__button--active'
+            }
             onClick={this.signupHandler}
           >
             Sign up
           </button>
           <button
-            className={this.state.login ? "email__controls__button--active" : "email__controls__button"}
+            className={
+              this.state.login ? 'email__controls__button--active' : 'email__controls__button'
+            }
             onClick={this.loginHandler}
           >
             Log in
@@ -55,22 +55,20 @@ class Email extends Component {
         </div>
         <form className="email__form" onSubmit={this.submitHandler}>
           <input
-          className="email__form__input"
+            className="email__form__input"
             onChange={this.emailHandler}
             type="email"
             required
             placeholder="Email"
           />
           <input
-          className="email__form__input"
+            className="email__form__input"
             onChange={this.passwordHandler}
             type="password"
             required
             placeholder="Password"
           />
-          <button
-          className="email__form__button"
-          >Submit</button>
+          <button className="email__form__button">Submit</button>
         </form>
       </div>
     );

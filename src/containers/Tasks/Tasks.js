@@ -1,37 +1,37 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
-import CSSTransition from "react-transition-group/CSSTransition";
-import TransitionGroup from "react-transition-group/TransitionGroup";
-import Task from "../Task/Task";
-import Header from "../../components/Header/Header";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import CSSTransition from 'react-transition-group/CSSTransition';
+import TransitionGroup from 'react-transition-group/TransitionGroup';
+import Task from '../Task/Task';
+import Header from '../../components/Header/Header';
 
-import * as actions from "../../store/actions";
+import * as actions from '../../store/actions';
 
-import "./Tasks.css";
+import './Tasks.css';
 
 class Tasks extends Component {
   state = {
-    task: ""
+    task: '',
   };
 
   componentDidMount() {
     this.props.updateTasks(this.props.userId);
   }
 
-  inputChangeHandler = event => {
+  inputChangeHandler = (event) => {
     this.setState({ task: event.target.value });
   };
 
-  formSubmitHandler = event => {
+  formSubmitHandler = (event) => {
     event.preventDefault();
     this.props.addTask(this.state.task, this.props.userId);
-    this.setState({ task: "" });
+    this.setState({ task: '' });
   };
 
-  renderTasks = () => {
-    return this.props.tasks.map(task => {
-      if (this.props.location.search === "?tasks=completed") {
+  renderTasks = () =>
+    this.props.tasks.map((task) => {
+      if (this.props.location.search === '?tasks=completed') {
         if (task.completed) {
           return (
             <CSSTransition key={task.id} classNames="slide" timeout={300}>
@@ -44,7 +44,7 @@ class Tasks extends Component {
             </CSSTransition>
           );
         }
-      } else if (this.props.location.search === "?tasks=active") {
+      } else if (this.props.location.search === '?tasks=active') {
         if (!task.completed) {
           return (
             <CSSTransition key={task.id} classNames="slide" timeout={300}>
@@ -70,7 +70,6 @@ class Tasks extends Component {
         );
       }
     });
-  };
 
   render() {
     return (
@@ -81,7 +80,7 @@ class Tasks extends Component {
             <div className="tasks__form__container">
               <form className="tasks__form" onSubmit={this.formSubmitHandler}>
                 <input
-                className="tasks__form__input"
+                  className="tasks__form__input"
                   value={this.state.task}
                   type="text"
                   placeholder="What needs to be done?"
@@ -91,47 +90,47 @@ class Tasks extends Component {
               </form>
               <div className="tasks__filters">
                 <NavLink
-                className="tasks__filters__link"
+                  className="tasks__filters__link"
                   style={
-                    this.props.location.search === ""
+                    this.props.location.search === ''
                       ? {
-                          textDecoration: "underline",
-                          fontWeight: "700"
+                          textDecoration: 'underline',
+                          fontWeight: '700',
                         }
                       : null
                   }
                   exact
-                  to={{ pathname: "/tasks" }}
+                  to={{ pathname: '/tasks' }}
                 >
                   All
                 </NavLink>
                 <NavLink
-                className="tasks__filters__link"
+                  className="tasks__filters__link"
                   style={
-                    this.props.location.search === "?tasks=active"
+                    this.props.location.search === '?tasks=active'
                       ? {
-                          textDecoration: "underline",
-                          fontWeight: "700"
+                          textDecoration: 'underline',
+                          fontWeight: '700',
                         }
                       : null
                   }
                   exact
-                  to={{ pathname: "/tasks", search: "?tasks=active" }}
+                  to={{ pathname: '/tasks', search: '?tasks=active' }}
                 >
                   Active
                 </NavLink>
                 <NavLink
-                className="tasks__filters__link"
+                  className="tasks__filters__link"
                   style={
-                    this.props.location.search === "?tasks=completed"
+                    this.props.location.search === '?tasks=completed'
                       ? {
-                          textDecoration: "underline",
-                          fontWeight: "700"
+                          textDecoration: 'underline',
+                          fontWeight: '700',
                         }
                       : null
                   }
                   exact
-                  to={{ pathname: "/tasks", search: "?tasks=completed" }}
+                  to={{ pathname: '/tasks', search: '?tasks=completed' }}
                 >
                   Completed
                 </NavLink>
@@ -147,22 +146,18 @@ class Tasks extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    addTask: (task, userId) => dispatch(actions.addTask(task, userId)),
-    updateTasks: userId => dispatch(actions.updateTasks(userId)),
-    logout: () => dispatch(actions.logout())
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  addTask: (task, userId) => dispatch(actions.addTask(task, userId)),
+  updateTasks: userId => dispatch(actions.updateTasks(userId)),
+  logout: () => dispatch(actions.logout()),
+});
 
-const mapStateToProps = state => {
-  return {
-    tasks: state.tasks,
-    userId: state.userId
-  };
-};
+const mapStateToProps = state => ({
+  tasks: state.tasks,
+  userId: state.userId,
+});
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Tasks);

@@ -8,7 +8,7 @@
   box-sizing: border-box;
 }
 
-.header button {
+.header__button {
   color: #3eceff;
   border: none;
   background: none;
@@ -16,16 +16,22 @@
   transition: 0.3s;
 }
 
-.header svg {
+.header__button svg {
   fill: #3eceff;
   height: 22px;
   width: 22px;
   transition: 0.3s;
 }
 
-.header button:hover {
+.header__button:hover {
   border: none;
   background: none;
   transform: scale(1.05);
   cursor: pointer;
+}
+
+@media (max-width: 520px) {
+  .header {
+    padding: 0px 10px;
+  }
 }

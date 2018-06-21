@@ -1,33 +1,27 @@
-import * as actionTypes from "./actionTypes";
+import * as actionTypes from './actionTypes';
 
 const initialState = {
   error: false,
-  errorMessage: "",
-  userId: "",
-  tasks: []
+  errorMessage: '',
+  userId: '',
+  tasks: [],
 };
 
-const authSuccess = (state, action) => {
-  return {
-    ...state,
-    userId: action.userId
-  };
-};
+const authSuccess = (state, action) => ({
+  ...state,
+  userId: action.userId,
+});
 
-const authFail = (state, action) => {
-  return {
-    ...state,
-    error: true,
-    errorMessage: action.errorMessage
-  };
-};
+const authFail = (state, action) => ({
+  ...state,
+  error: true,
+  errorMessage: action.errorMessage,
+});
 
-const updateStore = (state, action) => {
-  return {
-    ...state,
-    userId: action.userId
-  };
-};
+const updateStore = (state, action) => ({
+  ...state,
+  userId: action.userId,
+});
 
 const addTask = (state, action) => {
   const updatedTasksArr = [...state.tasks];
@@ -35,55 +29,50 @@ const addTask = (state, action) => {
 
   return {
     ...state,
-    tasks: updatedTasksArr
+    tasks: updatedTasksArr,
   };
 };
 
 const removeTask = (state, action) => {
-  const updatedTasksArr = state.tasks.filter(task => {
-    return task.id !== action.taskId;
-  });
+  const updatedTasksArr = state.tasks.filter(task => task.id !== action.taskId);
 
   return {
     ...state,
-    tasks: updatedTasksArr
+    tasks: updatedTasksArr,
   };
 };
 
 const updateTasks = (state, action) => {
   const tasks = [];
-  for (let task in action.data) {
+  for (const task in action.data) {
     tasks.push(action.data[task]);
   }
   return {
     ...state,
-    tasks
+    tasks,
   };
 };
 
 const modifyTask = (state, action) => {
   const tasks = [...state.tasks];
-  const modifiedTasks = tasks.map(task => {
+  const modifiedTasks = tasks.map((task) => {
     if (task.id === action.modifiedTask.id) {
       return action.modifiedTask;
-    } else {
-      return task;
     }
+    return task;
   });
   return {
     ...state,
-    tasks: modifiedTasks
+    tasks: modifiedTasks,
   };
 };
 
-const logout = () => {
-  return {
-    error: false,
-    errorMessage: "",
-    userId: "",
-    tasks: []
-  };
-};
+const logout = () => ({
+  error: false,
+  errorMessage: '',
+  userId: '',
+  tasks: [],
+});
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
