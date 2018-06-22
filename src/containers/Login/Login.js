@@ -13,15 +13,26 @@ class Login extends Component {
     }
   }
   render() {
+    console.log(this.props);
+    const {
+      emailAndPasswordAuth,
+      githubAuth,
+      googleAuth,
+      anonymousAuth,
+      error,
+      errorMessage,
+    } = this.props;
     return (
       <div className="login">
         <div className="login__container">
-          <Email emailAndPasswordAuth={this.props.emailAndPasswordAuth} />
+          <Email emailAndPasswordAuth={emailAndPasswordAuth} />
           <div>
-            <OAuth provider="Github" clicked={this.props.githubAuth} />
-            <OAuth provider="Google" clicked={this.props.googleAuth} />
-            <OAuth provider="Facebook" clicked={this.props.facebookAuth} />
-            <OAuth provider="Anonymous" clicked={this.props.anonymousAuth} />
+            <OAuth provider="Github" clicked={githubAuth} />
+            <OAuth provider="Google" clicked={googleAuth} />
+            <OAuth provider="Anonymous" clicked={anonymousAuth} />
+          </div>
+          <div className="login__error">
+            <p className="login__error__message">{error ? errorMessage : null}</p>
           </div>
         </div>
       </div>
@@ -31,6 +42,8 @@ class Login extends Component {
 
 const mapStateToProps = state => ({
   userId: state.userId,
+  error: state.error,
+  errorMessage: state.errorMessage,
 });
 
 const mapDispatchToProps = dispatch => ({

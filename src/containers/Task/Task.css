@@ -156,10 +156,14 @@
 
 
 @media(max-width: 520px){
+
+  .task__form {
+padding: 0 15px;
+  }
   
   .task__value,
   .task__form__input {
-    font-size: 20px;
+    font-size: 18px;
     width: 55%;
   }
 

@@ -9,14 +9,19 @@ const initialState = {
 
 const authSuccess = (state, action) => ({
   ...state,
+  error: false,
+  errorMessage: '',
   userId: action.userId,
 });
 
-const authFail = (state, action) => ({
-  ...state,
-  error: true,
-  errorMessage: action.errorMessage,
-});
+const authFail = (state, action) => {
+  console.log(action);
+  return {
+    ...state,
+    error: true,
+    errorMessage: action.errorMessage,
+  };
+};
 
 const updateStore = (state, action) => ({
   ...state,

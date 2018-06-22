@@ -10,7 +10,6 @@ class Email extends Component {
 
   submitHandler = (event) => {
     event.preventDefault();
-    console.log('?');
     this.props.emailAndPasswordAuth(this.state.email, this.state.password, this.state.login);
   };
 
@@ -24,12 +23,10 @@ class Email extends Component {
 
   signupHandler = () => {
     this.setState({ login: false });
-    console.log(this.state);
   };
 
   loginHandler = () => {
     this.setState({ login: true });
-    console.log(this.state);
   };
 
   render() {

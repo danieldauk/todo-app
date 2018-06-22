@@ -53,7 +53,7 @@ class Task extends Component {
 
   inputLengthHandler = (str) => {
     const mq = window.matchMedia('(max-width: 520px)');
-    const maxLength = mq.matches ? 10 : 20;
+    const maxLength = mq.matches ? 15 : 20;
 
     if (str.length > maxLength) {
       return `${str.slice(0, maxLength)}...`;

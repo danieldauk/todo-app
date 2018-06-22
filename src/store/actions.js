@@ -96,7 +96,6 @@ export const emailAndPasswordAuth = (email, password, login) => {
   console.log(login);
   return (dispatch) => {
     if (login) {
-      console.log('logging in');
       app
         .auth()
         .signInWithEmailAndPassword(email, password)
@@ -106,6 +105,7 @@ export const emailAndPasswordAuth = (email, password, login) => {
         })
         .catch((error) => {
           const errorMessage = error.message;
+          dispatch(authFail(errorMessage));
           console.log(errorMessage);
         });
     } else {
@@ -115,11 +115,10 @@ export const emailAndPasswordAuth = (email, password, login) => {
         .then((response) => {
           const userId = response.user.uid;
           dispatch(authSuccess(userId));
-
-          // implement log in (not sign in)
         })
         .catch((error) => {
           const errorMessage = error.message;
+          dispatch(authFail(errorMessage));
           console.log(errorMessage);
         });
     }
@@ -168,15 +167,10 @@ export const auth = provider => (dispatch) => {
     .catch((error) => {
       const errorMessage = error.message;
       dispatch(authFail(errorMessage));
-      console.log(errorMessage);
-      console.log(error.email);
-      console.log(error);
-      console.log(error.credential);
 
       if (error.code === 'auth/account-exists-with-different-credential') {
         const link = window.confirm('Account exists with different credential. Please sign in with Google account to link accounts');
         if (link) {
-          // https://firebase.google.com/docs/auth/web/google-signin
           dispatch(linkAccounts(error.email, error.credential));
         }
       }
@@ -184,7 +178,6 @@ export const auth = provider => (dispatch) => {
 };
 
 export const authSuccess = (userId) => {
-  console.log(userId);
   localStorage.setItem('userId', userId);
 
   return {
